@@ -29,6 +29,7 @@ header .perfil{
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    margin-top:0.3em;
 }
 
 header .perfil p{
@@ -123,8 +124,6 @@ footer{
     justify-content: space-between;
     align-items: center;
     color: #fff;
-    position: absolute;
-    bottom:0px;
     width:100%;
 }
 
