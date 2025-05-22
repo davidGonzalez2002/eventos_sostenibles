@@ -77,4 +77,7 @@
     .listado-eventos .datos-evento div{
         width:100%;
     }
+    .titulo h3{
+        padding:0px;
+    }
 }
