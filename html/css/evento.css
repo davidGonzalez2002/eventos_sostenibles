@@ -80,3 +80,8 @@ main section .puntuacion{
 main section .puntuacion img{
     width:2em;
 }
+
+main iframe{
+    width:90%;
+    height:auto;
+}
