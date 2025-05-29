@@ -1,48 +1,34 @@
 package com.indra.eventossostenibles;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.HashSet;
 
 public class Organizador extends Cuenta{
     private String razonSocial;
 
-    public Organizador(int id, String nombre, String clave_acceso, String email, ArrayList<Evento> eventos, String razonSocial) {
-        super(id, nombre, clave_acceso, email, eventos);
+    public Organizador(String nombre, String claveAcceso, String email, HashSet<Evento> eventos, String razonSocial) {
+        super(nombre, claveAcceso, email, eventos);
         this.razonSocial = razonSocial;
     }
 
-    public Organizador(int id, String nombre, String clave_acceso, String email, String razonSocial) {
-        super(id, nombre, clave_acceso, email);
+    public Organizador(String nombre, String clave_acceso, String email, String razonSocial) {
+        super(nombre, clave_acceso, email);
         this.razonSocial = razonSocial;
     }
 
     /**
-     * Pide los datos del evento y lo añade a los creados por este organizador
+     * Crea un evento y lo añade a la lista de eventos creados
+     * @param nombre - Nombre del evento
+     * @param fecha - Fecha del evento
+     * @param categoria - Categoria del evento
+     * @param tipo - Si es presencial, vale 0, si es online vale 1, es un entero de cara a futuras actualizaciones(por ejemplo si queremos un tercer tipo, semipresencial por ejemplo)
+     * @retrun - Verdadero si lo crea, falso si no lo crea
      */
-    public void crearEvento(){
-        Scanner in = new Scanner(System.in).useDelimiter("\n");
-        String nombre,fecha,categoria;
-        int tipo;
-        System.out.print("Nombre del evento: ");
-        nombre=in.next();
-        System.out.print("Fecha del evento");
-        fecha=in.next();
-        System.out.print("Categoria(TALLER, CONFERENCIA, CHARLA o FORMACION): ");
-        categoria=in.next().toUpperCase(); //Para que coincida con el enum
-        System.out.println("""
-                1) Presencial
-                2) Online""");
-        tipo=in.nextInt();
-        if(tipo==1){
-            System.out.print("Dirección física: ");
-            this.getEventos().add(new EventoPresencial(nombre,fecha,Categoria.valueOf(categoria),in.next()));
+    public boolean crearEvento(String nombre, String fecha, Categoria categoria,String direccion, int tipo){
+        if(tipo==0){
+            return this.getEventos().add(new EventoPresencial(nombre,fecha,categoria,direccion));
         }
-        else if(tipo==2){
-            System.out.print("Enlace a la reunión: ");
-            this.getEventos().add(new EventoOnline(nombre,fecha,Categoria.valueOf(categoria),in.next()));
-        }
-        else{
-            System.out.println("Tipo no váido");
+        else {
+            return this.getEventos().add(new EventoOnline(nombre,fecha,categoria,direccion));
         }
     }
 

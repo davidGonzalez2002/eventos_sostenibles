@@ -1,39 +1,33 @@
 package com.indra.eventossostenibles;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
-public class Cuenta {
-    private int id;
+public abstract class Cuenta implements Comparable<Cuenta>{
     private String nombre;
     private String claveAcceso;
     private String email;
-    private ArrayList<Evento> eventos;
+    private HashSet<Evento> eventos;
 
-    public Cuenta(int id, String nombre, String clave_acceso, String email, ArrayList<Evento> eventos) {
-        this.id = id;
+    public Cuenta(String nombre, String clave_acceso, String email, HashSet<Evento> eventos) {
         this.nombre = nombre;
         this.claveAcceso = clave_acceso;
         this.email = email;
         this.eventos = eventos;
     }
 
-    public Cuenta(int id, String nombre, String clave_acceso, String email) {
-        this.id = id;
+    public Cuenta(String nombre, String clave_acceso, String email) {
         this.nombre = nombre;
         this.claveAcceso = clave_acceso;
         this.email = email;
-        this.eventos=new ArrayList<>();
+        this.eventos=new HashSet<>();
+    }
+
+    @Override
+    public int compareTo(Cuenta c){
+        return this.nombre.compareTo(c.getNombre());
     }
 
     /*Getters, setters y toString*/
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;
@@ -59,18 +53,17 @@ public class Cuenta {
         this.email = email;
     }
 
-    public ArrayList<Evento> getEventos() {
+    public HashSet<Evento> getEventos() {
         return eventos;
     }
 
-    public void setEventos(ArrayList<Evento> eventos) {
+    public void setEventos(HashSet<Evento> eventos) {
         this.eventos = eventos;
     }
 
     @Override
     public String toString() {
         return "Cuenta{" +
-                "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", clave_acceso='" + claveAcceso + '\'' +
                 ", email='" + email + '\'' +

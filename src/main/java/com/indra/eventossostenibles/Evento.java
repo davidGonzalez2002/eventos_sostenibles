@@ -1,6 +1,6 @@
 package com.indra.eventossostenibles;
 
-public abstract class Evento {
+public abstract class Evento implements Comparable<Evento>{
     private String nombre;
     private String fecha;
     private boolean activo;
@@ -17,6 +17,11 @@ public abstract class Evento {
      * Se encarga de iniciar el evento, mostrando un mensaje por consola
      */
     public abstract void iniciarEvento();
+
+    @Override
+    public int compareTo(Evento e){
+        return this.nombre.compareTo(e.getNombre()); //Podria tener un ID y comparar por el, pero para simplificar comparo por el nombre
+    }
 
     /*Getters, setters y toString */
 

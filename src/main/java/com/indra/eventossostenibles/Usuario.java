@@ -1,24 +1,48 @@
 package com.indra.eventossostenibles;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Usuario extends Cuenta{
 
 
-    public Usuario(int id, String nombre, String clave_acceso, String email, ArrayList<Evento> eventos) {
-        super(id, nombre, clave_acceso, email,eventos);
+    public Usuario(String nombre, String claveAcceso, String email, HashSet<Evento> eventos) {
+        super(nombre, claveAcceso, email,eventos);
     }
 
-    public Usuario(int id, String nombre, String clave_acceso, String email) {
-        super(id, nombre, clave_acceso, email);
+    public Usuario(String nombre, String clave_acceso, String email) {
+        super(nombre, clave_acceso, email);
     }
 
     /**
-     * Permite al usuario registrarse en un evento
-     * @param evento - Objeto con el evento en el que se registra
+     * Registra a un usuario en un evento pasado por parametro
+     * @param evento - Evento en el que se registra
+     * @return - true si se registra con exito, false si no lo hace
      */
-    public void registrarse(Evento evento){
-        super.getEventos().add(evento);
+    public boolean registrarse(Evento evento){
+        return this.getEventos().add(evento);
+    }
+
+    /**
+     * Anula el registro de un usuario en un evento pasado por parametro
+     * @param evento - Evento del que lo retiraremos
+     * @return True si lo elimina, false si no lo hace
+     */
+    public boolean anularRegistro(Evento evento){
+        return this.getEventos().remove(evento);
+    }
+
+    /**
+     * Devuelve el evento del usuario con el nombre pasado por parametro
+     * @param nombre - Nombre del evento
+     * @return - El evento o null si no existe
+     */
+    public Evento getEventoNombre(String nombre){
+        for(Evento e:this.getEventos()){
+            if(e.getNombre().equals(nombre)){
+                return e;
+            }
+        }
+        return null;
     }
 
     /*toString*/
